@@ -3,3 +3,4 @@
 *.out
 *.manifest
 sandbox.py
+*.db

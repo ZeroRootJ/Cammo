@@ -6,16 +6,21 @@
 ### Environment  
 Python 3.7.4  
 python-telegram-bot 20.0  
+sqlite3  
 goormIDE (Chrome 서브프로세스 사용금지 정책(*selenium 사용불가)으로 인해 bs4, requests 사용)    
 
-### Usage
-
-- requirements  
-  {USER_ID=사이트 유저 아이디, USER_PWD=사이트 유저 패스워드, TOKEN=텔레그램 봇 토큰, CHAT_ID=사용자의 텔레그램 챗 아이디}를 포함한 .env 파일
-  
+### Usage   
+- Requirements  
+    Telegram에서 생성된 Telegram Bot 및 TOKEN (.env파일에 추가)  
+    유저정보를 포함한 userdb.db  
+    
 - 서비스 실행  
-  nohup python3 loop.py &
-
+    nohup python3 loop.py &  
+  
 - 서비스 종료  
-  ps ux  
-  kill -9 PID
+    ps ux  
+    kill -9 PID  
+  
+### DEV log  
+23.03.09 1인용 알림 서비스 구현 v1.0  
+23.03.11 2인 이상 서비스를 위한 유저 DB 추가 및 관련 함수 변경 v2.0  

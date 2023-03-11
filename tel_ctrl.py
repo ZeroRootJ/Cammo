@@ -12,11 +12,9 @@ async def main():
 
 '''
 
-async def send(msg):
+async def send(msg, chat_id):
     load_dotenv()
-    token = os.environ.get("TOKEN")
-    chat_id = os.environ.get("CHAT_ID")
-    
+    token = os.environ.get("TOKEN")    
     bot = telegram.Bot(token)
     async with bot:
         await bot.send_message(text=msg, chat_id=chat_id)

@@ -1,15 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 import os
 
-def get_vcount():
+def get_vcount(login_id,login_pwd):
     session = requests.session()
 
-    load_dotenv()
-    login_id = os.environ.get("LOGIN_ID")
-    login_pwd = os.environ.get("LOGIN_PWD")
-    
     login_info = {
         "login_id" : login_id,
         "login_pwd" : login_pwd
