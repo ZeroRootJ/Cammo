@@ -4,13 +4,16 @@ import telegram
 from dotenv import load_dotenv
 import os
 
-'''
-async def main():
+
+async def fetch():
+    load_dotenv()
+    token = os.environ.get("TOKEN")
     bot = telegram.Bot(token)
     async with bot:
-        print((await bot.get_updates())[0])
+        updates = await bot.get_updates()
+    for u in updates:
+        print(u.message)
 
-'''
 
 async def send(msg, chat_id):
     load_dotenv()
@@ -20,10 +23,9 @@ async def send(msg, chat_id):
         await bot.send_message(text=msg, chat_id=chat_id)
 
 
-'''
 if __name__ == '__main__':
-    asyncio.run(main())
-'''
+    asyncio.run(fetch())
+
 
 '''
 while True:
