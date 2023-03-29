@@ -12,7 +12,10 @@ async def fetch():
     async with bot:
         updates = await bot.get_updates()
     for u in updates:
-        print(u.message)
+        print(u.message.chat.id)
+        print(u.message.chat.first_name)
+        print(u.message.chat.username)
+        print(u.message.text)
 
 
 async def send(msg, chat_id):
