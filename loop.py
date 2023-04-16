@@ -22,7 +22,7 @@ c.execute("SELECT * FROM user")
 table_list = c.fetchall()
 for usr in table_list:
     c.execute("UPDATE user SET lastcount = {} WHERE id = '{}'".format(get_vcount(usr[0],usr[1]),usr[0]))
-    asyncio.run(send("{}님의 마이픽이북 검수완료 알림 서비스 시작".format(usr[0]),usr[2]))
+    # asyncio.run(send("{}님의 마이픽이북 검수완료 알림 서비스 시작".format(usr[0]),usr[2]))
 conn.commit()
     
 # LOOP
