@@ -28,4 +28,9 @@ def check_db():
 # execute_db("DELETE FROM user WHERE id='birdonmars'")
 
 # Insert USER
-# execute_db("INSERT INTO user VALUES ('birdonmars', 'pwd', 'telegram_chatid', Number)")
+# execute_db("INSERT INTO user VALUES ('id', 'pwd', 'telegram_chatid', VolunteerNumber, Time)")
+
+# ADD Coloumn
+# execute_db('ALTER TABLE user ADD lasttime INT')
+
+check_db()
