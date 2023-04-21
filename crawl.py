@@ -1,6 +1,7 @@
 import requests
-from bs4 import BeautifulSoup
 import os
+import re
+from bs4 import BeautifulSoup
 
 def get_vcount(login_id,login_pwd):
     session = requests.session()
@@ -59,7 +60,8 @@ def get_time(login_id,login_pwd):
 
     soup = BeautifulSoup(response.text,'html.parser')
     time_raw = soup.select_one('#content > div.mypageTop1 > ul > li:nth-child(4) > span').get_text()
-    time_inseconds = int(time_raw[:-10])*3600 + int(time_raw[-7:-5])*60 + int(time_raw[-3:-1])
+    time_tuple = tuple(map(int,re.findall(r'\d+',time_raw)))
+    time_inseconds = time_tuple[0]*3600 + time_tuple[1]*60 + time_tuple[2]
     # time_raw = '00시간 00분 00초' > time_inseconds 000000 (seconds)
 
     return time_inseconds
