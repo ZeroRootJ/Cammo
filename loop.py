@@ -9,7 +9,7 @@ import os
 db_path = os.getcwd() + '/userdb.db'
 conn = sqlite3.connect(db_path)
 c = conn.cursor()
-c.execute("CREATE TABLE IF NOT EXISTS user(id text, pwd text, chatid text, lastcount int)")
+c.execute("CREATE TABLE IF NOT EXISTS user(id text, pwd text, chatid text, lastcount int, lasttime int)")
 '''
 [0] : id
 [1] : pwd
