@@ -1,6 +1,15 @@
 import sqlite3
 import os
 
+
+# Fetch Data from DB
+def fetch_all_db(SQLCMD,db_path):
+    conn = sqlite3.connect(db_path)
+    c = conn.cursor()
+    c.execute(SQLCMD)
+    return c.fetchall()
+    
+
 # Execute on DB
 def execute_db(SQLCMD):
     db_path = os.getcwd() + '/userdb.db'

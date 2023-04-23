@@ -22,6 +22,7 @@ import logging
 https://docs.python-telegram-bot.org/en/stable/examples.html
 '''
 
+db_path = os.getcwd()+'/userdb.db'
 
 UID, PWD = range(2)
 
@@ -94,25 +95,37 @@ async def pwd(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # logging.info(context.user_data)
     
     try:
+        """ Validating User Information by loging into page & fetch sample data """
         get_vcount(context.user_data["UID"],context.user_data["PWD"])
+        
     except:
+        """ Login FAILS > raises ERR > Ask user for new login credentials """
         await update.message.reply_text(
             "LOGIN 실패\n"
             "다시 시도해주세요")
     else:
-        execute_db("INSERT INTO user VALUES ('{}', '{}', {}, {}, {})".format(
-            context.user_data["UID"],
-            context.user_data["PWD"],
-            update.message.chat.id,
-            get_vcount(context.user_data["UID"],context.user_data["PWD"]),
-            get_time(context.user_data["UID"],context.user_data["PWD"])
-            ))
-        
-        await update.message.reply_text(
-            "LOGIN 성공!\n"
-            "검수 완료 시 메세지가 전송됩니다")
-    finally:
-        return ConversationHandler.END
+        """ Login Success > Check for overlapping id(primary key) in DB """
+        if fetch_all_db("SELECT id FROM user WHERE id='{}'".format(context.user_data["UID"]), db_path):
+            """ Overlapping ID Existes > Terminate """
+            await update.message.reply_text(
+            "중복된 ID입니다\n"
+            "다시 시도해주세요")
+        else:
+            """ No overlapping id > INSERT into database """
+            execute_db("INSERT INTO user VALUES ('{}', '{}', {}, {}, {})".format(
+                context.user_data["UID"],
+                context.user_data["PWD"],
+                update.message.chat.id,
+                get_vcount(context.user_data["UID"],context.user_data["PWD"]),
+                get_time(context.user_data["UID"],context.user_data["PWD"])
+                ))
+
+            await update.message.reply_text(
+                "LOGIN 성공!\n"
+                "검수 완료 시 메세지가 전송됩니다")
+                
+    
+    return ConversationHandler.END
 
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
