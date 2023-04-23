@@ -47,13 +47,7 @@ async def record_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     /record
     """
     chatid = update.message.chat.id
-    
-    db_path = os.getcwd() + '/userdb.db'
-    conn = sqlite3.connect(db_path)
-    c = conn.cursor()
-    c.execute("SELECT * FROM user WHERE chatid = '{}'".format(chatid))
-    usr = c.fetchall()[0]
-    
+    usr = fetch_all_db("SELECT * FROM user WHERE chatid = '{}'".format(chatid),db_path)[0]
     await update.message.reply_text(get_record(usr[0],usr[1]))
     
     

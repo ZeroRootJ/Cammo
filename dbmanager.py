@@ -3,7 +3,7 @@ import os
 
 
 # Fetch Data from DB
-def fetch_all_db(SQLCMD,db_path):
+def fetch_all_db(SQLCMD, db_path):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
     c.execute(SQLCMD)
@@ -11,8 +11,7 @@ def fetch_all_db(SQLCMD,db_path):
     
 
 # Execute on DB
-def execute_db(SQLCMD):
-    db_path = os.getcwd() + '/userdb.db'
+def execute_db(SQLCMD, db_path):
     conn = sqlite3.connect(db_path)
     c = conn.cursor()
     c.execute(SQLCMD)
