@@ -25,7 +25,7 @@ goormIDE (Chrome 서브프로세스 사용금지 정책(*selenium 사용불가)�
     유저정보를 포함한 userdb.db  
     
 - 서비스 실행  
-    nohup python3 loop.py &  
+    nohup python3 loop.py 1>log.out 2>&1 &  
     nohup python3 chathandler.py &  
   
 - 서비스 종료  
@@ -42,3 +42,4 @@ goormIDE (Chrome 서브프로세스 사용금지 정책(*selenium 사용불가)�
 23.04.21 새로운 사용자를 데이터베이스에 추가하는 작업 자동화 (사용자가 채팅창에서 직접 할 수 있도록 기능 제작)  
 23.04.23 새로운 사용자 데이터베이스 추가시 중복 아이디 제한  
 23.04.23 dbmanger 관련 함수 수정  
+23.04.24 시간 표시 관련 Bug Fix  

@@ -60,8 +60,16 @@ def get_time(login_id,login_pwd):
 
     soup = BeautifulSoup(response.text,'html.parser')
     time_raw = soup.select_one('#content > div.mypageTop1 > ul > li:nth-child(4) > span').get_text()
-    time_tuple = tuple(map(int,re.findall(r'\d+',time_raw)))
-    time_inseconds = time_tuple[0]*3600 + time_tuple[1]*60 + time_tuple[2]
+    time_split = time_raw.split(' ')
+    time_inseconds = 0
+    for timestr in time_split:
+        if '시간' in timestr:
+            time_inseconds += int(re.findall(r'\d+',timestr)[0])*3600
+        elif '분' in timestr:
+            time_inseconds += int(re.findall(r'\d+',timestr)[0])*60
+        elif '초' in timestr:
+            time_inseconds += int(re.findall(r'\d+',timestr)[0])
+
     # time_raw = '00시간 00분 00초' > time_inseconds 000000 (seconds)
 
     return time_inseconds

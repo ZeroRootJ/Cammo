@@ -27,6 +27,8 @@ for usr in table_list:
     # asyncio.run(send("{}님의 마이픽이북 검수완료 알림 서비스 시작".format(usr[0]),usr[2]))
 conn.commit()
     
+
+print("MONITERING STARTED")
 # LOOP
 while True:
     c.execute("SELECT * FROM user")
@@ -41,5 +43,6 @@ while True:
             conn.commit()
             asyncio.run(send("""검수가 완료되었습니다
 + {}시간 {}분 {}초""".format(int(time_added/3600),int((time_added%3600)/60),time_added%3600%60),usr[2]))
+            print("SENT MSG to {}".format(usr[0]))
     time.sleep(60)
     
